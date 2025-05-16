@@ -1,6 +1,6 @@
-let number1;
+let num1;
+let num2;
 let operator;
-let number2;
 
 function add(n1, n2) {
     if (typeof n1 !== "number" || typeof n2 !== "number") {
@@ -34,96 +34,124 @@ function divide(n1, n2) {
     }
 }
 
+function operate(num1, operation, num2) {
+    switch (operation) {
+        case "+":
+            return add(num1, num2);
+        case "-":
+            return substract(num1, num2);
+        case "×":
+            return multiply(num1, num2);
+        case "÷":
+            return divide(num1, num2);
+    }
+}
+
 function updateCanvas(targetText) {
-    let resultDiv = document.querySelector(".cal-result");
+    const resultDiv = document.querySelector(".cal-result");
     if (targetText === 'C') {
         resultDiv.innerHTML = "";
     } else {
-        resultDiv.textContent += targetText;
+        resultDiv.textContent += `${targetText}`;
+    }
+}
+
+function clearCanvas() {
+    const resultDiv = document.querySelector(".cal-result");
+    resultDiv.textContent = "";
+}
+
+function setValues() {
+    const resultDiv = document.querySelector(".cal-result");
+    variables = resultDiv.textContent.split('');
+    if (variables.includes("+")) {
+        num1 = variables.slice(0,variables.indexOf("+")).join('');
+        operator = variables.slice(variables.indexOf("+"),variables.indexOf("+")+1).join('');
+        num2 = variables.slice(variables.indexOf("+")+1).join('');
+    } else if (variables.includes("-")) {
+        num1 = variables.slice(0,variables.indexOf("-")).join('');
+        operator = variables.slice(variables.indexOf("-"),variables.indexOf("-")+1).join('');
+        num2 = variables.slice(variables.indexOf("-")+1).join('');   
+    } else if (variables.includes("×")) {
+        num1 = variables.slice(0,variables.indexOf("×")).join('');
+        operator = variables.slice(variables.indexOf("×"),variables.indexOf("×")+1).join('');
+        num2 = variables.slice(variables.indexOf("×")+1).join('');   
+    } else {
+        num1 = variables.slice(0,variables.indexOf("÷")).join('');
+        operator = variables.slice(variables.indexOf("÷"),variables.indexOf("÷")+1).join('');
+        num2 = variables.slice(variables.indexOf("÷")+1).join('');   
     }
 }
 
 let buttons = document.querySelector(".cal-buttons");
 buttons.addEventListener("click", (event) => {
     let target = event.target;
-
+    let currentValue = target.textContent;
     switch(target.id) {
         case 'num0':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num1':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num2':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num3':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num4':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num5':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num6':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num7':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num8':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'num9':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'divide':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'multiply':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'substract':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'add':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
         case 'result':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            setValues();
+            clearCanvas();
+            updateCanvas(operate(num1, operator, num2));
             break;
         case 'clear':
-            console.log(`You pressed ${target.textContent}`);
-            updateCanvas(target.textContent);
+            console.log(`You pressed ${currentValue}`);
+            updateCanvas(currentValue);
             break;
     }
 })
-
-function operate(num1, operation, num2) {
-    switch (operation.toLowerCase()) {
-        case "+":
-            return add(num1, num2);
-        case "-":
-            return substract(num1, num2);
-        case "x":
-            return multiply(num1, num2);
-        case "/":
-            return divide(num1, num2);
-    }
-}
